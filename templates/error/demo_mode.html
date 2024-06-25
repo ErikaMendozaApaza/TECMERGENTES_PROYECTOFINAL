@@ -1,0 +1,87 @@
+{% if demo_mode_enabled %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script>
+  // Initialize Toastr
+  toastr.options = {
+      "closeButton": true,
+      "debug": false,
+      "newestOnTop": false,
+      "progressBar": true,
+      "positionClass": "toast-top-right",
+      "preventDuplicates": false,
+      "onclick": null,
+      "showDuration": "300",
+      "hideDuration": "1000",
+      "timeOut": "5000",
+      "extendedTimeOut": "1000",
+      "showEasing": "swing",
+      "hideEasing": "linear",
+      "showMethod": "fadeIn",
+      "hideMethod": "fadeOut",
+      "toastContainerId": "toastr-container"
+  };
+
+  // Esta función se llamará cuando se cargue la página
+  $(document).ready(function() {
+      // Interceptar el envío del formulario
+      $("form").submit(function(event) {
+          event.preventDefault();  // Evitar el envío de formularios predeterminados
+          
+          // Simule una solicitud AJAX aquí
+          // En el código real, reemplácelo por la llamada AJAX
+          setTimeout(function() {
+              var response = {
+                  status: 'error',
+                  message: 'Modifications are not allowed in demo mode.'
+              };
+
+              // Compruebe si la respuesta contiene un mensaje de error
+              if (response.status === 'error') {
+                  // Mostrar el mensaje de error usando Toastr
+                  toastr.error(response.message);
+              } else {
+                  // Continúe con el envío normal del formulario si no hay error
+                  $(event.target).unbind('submit').submit();
+              }
+          }, 1000); // Retardo simulado para la demostración
+      });
+  });
+</script>
+<script>
+  // Initialize Toastr
+  toastr.options = {
+      "closeButton": true,
+      "debug": false,
+      "newestOnTop": false,
+      "progressBar": true,
+      "positionClass": "toast-top-right",
+      "preventDuplicates": false,
+      "onclick": null,
+      "showDuration": "300",
+      "hideDuration": "1000",
+      "timeOut": "5000",
+      "extendedTimeOut": "1000",
+      "showEasing": "swing",
+      "hideEasing": "linear",
+      "showMethod": "fadeIn",
+      "hideMethod": "fadeOut",
+      "toastContainerId": "toastr-container"
+  };
+
+  // Esta función se llamará cuando se cargue la página
+  $(document).ready(function() {
+      // Interceptar clics en enlaces
+      $("a").click(function(event) {
+          // Compruebe si el href del enlace contiene "eliminar"
+          if ($(this).attr("href").includes("delete")) {
+              // Evitar el comportamiento predeterminado (navegar al vínculo)
+              event.preventDefault();
+              
+              // Mostrar un mensaje de error de Toastr
+              toastr.error('Deletion is not allowed in demo mode');
+          }
+      });
+  });
+</script>
+{% endif %}
